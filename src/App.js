@@ -1,15 +1,10 @@
 import React from 'react';
 import './App.css';
+import Container from './Container';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          achievement
-        </p>
-      </header>
-    </div>
+    <Container />
   );
 }
 
