@@ -1,0 +1,44 @@
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+.header {
+  background-color: #0078D7;
+  height: 48px;
+}
+
+.header-title {
+  color: white;
+  line-height: 48px;
+  margin-left: 20px;
+}
+
+.container {
+  height: 100%;
+}
+
+.content {
+  height: calc(100% - 48px);
+  display: flex;
+  flex-direction: row;
+}
+
+.left-column {
+  background-color: #F4F4F4;
+  flex: 0 0 290px;
+  border-right: 1px solid #EAEAEA;
+}
+
+.center-column {
+  flex: 1 1 auto;
+}
+
+.right-column {
+  background-color: #F4F4F4;
+  flex: 0 0 360px;
+  border-left: 1px solid #EAEAEA;
+}
