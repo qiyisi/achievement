@@ -1,6 +1,6 @@
 import React from 'react';
 
-class AddItem extends React.Component {
+class AddAchievementItem extends React.Component {
   constructor(props) {
     super(props)
     this.state = { value: '' }
@@ -13,18 +13,18 @@ class AddItem extends React.Component {
   onEnterKeyPress(event) {
     if (event.key === 'Enter') {
       if (this.state.value) {
-        this.props.addType(this.state.value)
+        this.props.addAchievement(this.state.value)
         this.setState({ value: '' });
       }
     }
   }
   render() {
     return (
-      <div className='type-item add-item'>
-        <span><input className='add-item-input' placeholder='add' value={this.state.value} onChange={this.onInputChange} onKeyPress={this.onEnterKeyPress} /></span>
-      </div >
+      <div className="add-achievement-item">
+        <span><input className="add-achievement-item-input" placeholder="add" value={this.state.value} onChange={this.onInputChange} onKeyPress={this.onEnterKeyPress} /></span>
+      </div>
     )
   }
 }
 
-export default AddItem;
+export default AddAchievementItem;

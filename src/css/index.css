@@ -35,6 +35,8 @@ body {
 }
 
 .center-column {
+  display: flex;
+  flex-direction: column;
   flex: 1 1 auto;
 }
 
@@ -68,20 +70,77 @@ body {
   color: #0078D7;
 }
 
-.add-item {
+.add-type-item {
   outline: 0;
 }
 
-.add-item > span::before {
+.add-type-item > span::before {
   content: '+';
   margin-right: 5px;
 }
 
-.add-item-input {
+.add-type-item-input {
   flex-grow: 1;
   outline: 0;
   border: 0;
   background-color: transparent;
   font-family: "Microsoft Yahei","微软雅黑","STXihei","Meiryo UI","Meiryo","メイリオ","ＭＳ Ｐゴシック","MS PGothic","Hiragino Kaku Gothic Pro","Arial Unicode MS","Helvetica Neue","Helvetica","Arial",sans-serif;
   font-size: 1em;
+}
+
+.type-header {
+  padding: 24px 32px;
+  color: #0078D7;
+  font-size: 1.4em;
+}
+
+.achievement-item-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  overflow: scroll;
+}
+
+.add-achievement-item {
+  flex: 0 0;
+  margin: 0 16px;
+  border-bottom: 1px solid #EAEAEA;
+  height: 46px;
+  line-height: 46px;
+}
+
+.add-achievement-item > span {
+  display: flex;
+}
+
+.add-achievement-item > span::before {
+  content: '+';
+  margin-right: 5px;
+}
+
+.add-achievement-item-input {
+  flex-grow: 1;
+  outline: 0;
+  border: 0;
+  background-color: transparent;
+  font-family: "Microsoft Yahei","微软雅黑","STXihei","Meiryo UI","Meiryo","メイリオ","ＭＳ Ｐゴシック","MS PGothic","Hiragino Kaku Gothic Pro","Arial Unicode MS","Helvetica Neue","Helvetica","Arial",sans-serif;
+  font-size: 1em;
+  height: 46px;
+}
+
+.achievement-list {
+  flex: 1 1 auto;
+  overflow: scroll;
+}
+
+.achievement-item {
+  flex: 0 0;
+  margin: 0 16px;
+  border-bottom: 1px solid #EAEAEA;
+  height: 46px;
+  line-height: 46px;
+}
+
+.achievement-item:hover {
+  background-color:#ededed;
 }
