@@ -144,3 +144,17 @@ body {
 .achievement-item:hover {
   background-color:#ededed;
 }
+
+.achievement-item-focus {
+  background-color:#ededed;
+}
+
+.right-column-box {
+  margin: 10px;
+  border: 1px solid #EAEAEA;
+  background-color: #fff;
+}
+
+.right-column-box-content {
+ margin: 16px;
+}
