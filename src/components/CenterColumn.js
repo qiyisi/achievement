@@ -10,7 +10,7 @@ class CenterColumn extends React.Component {
         <div className="achievement-item-container">
           <AddAchievementItem addAchievement={this.props.addAchievement} />
           <div className="achievement-list">
-            {this.props.achievementList.map(item => (<AchievementItem data={item} key={item.index} focusAchievement={this.props.focusAchievement} onAchievementItemClick={this.props.onAchievementItemClick} onAchievementItemCheckboxClick={this.props.onAchievementItemCheckboxClick} />))}
+            {this.props.achievementList.map(item => (<AchievementItem data={item} key={item.id} focusAchievement={this.props.focusAchievement} onAchievementItemClick={this.props.onAchievementItemClick} onAchievementItemCheckboxClick={this.props.onAchievementItemCheckboxClick} />))}
           </div>
         </div>
       </div>

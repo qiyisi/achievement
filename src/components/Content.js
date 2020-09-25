@@ -2,14 +2,16 @@ import React from 'react';
 import LeftColumn from './LeftColumn';
 import CenterColumn from './CenterColumn';
 import RightColumn from './RightColumn';
+import { getCollection, addDoc, updateDoc } from './firebase';
 
 class Content extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      typeList: [{ name: 'test', index: '1' }, { name: 'books', index: '2' }, { name: 'games', index: '3' }],
+      typeList: [],
       focusType: null,
-      achievementList: [{ content: 'ach 1', index: '1', completed: true }, { content: 'ach 2', index: '2', completed: false }],
+      achievements: [],
+      achievementList: [],
       showRightColumn: false
     }
     this.setFocusType = this.setFocusType.bind(this)
@@ -18,32 +20,48 @@ class Content extends React.Component {
     this.addType = this.addType.bind(this)
     this.addAchievement = this.addAchievement.bind(this)
   }
-  setFocusType(index) {
-    const focusType = this.state.typeList.find((item) => item.index === index)
-    this.setState({ focusType: focusType })
+  componentDidMount() {
+    getCollection('types').then(result => this.setState({ typeList: result }))
+    getCollection('achievements').then(result => this.setState({ achievements: result }))
   }
-  setFocusAchievement(index) {
-    const focusAchievement = this.state.achievementList.find((item) => item.index === index)
+  setFocusType(id) {
+    const focusType = this.state.typeList.find((item) => item.id === id)
+    const achievementList = this.state.achievements.filter((item) => item.type === focusType.id)
+    this.setState({ focusType, achievementList })
+  }
+  setFocusAchievement(id) {
+    const focusAchievement = this.state.achievementList.find((item) => item.id === id)
     this.setState({ focusAchievement: focusAchievement, showRightColumn: true })
   }
-  checkAchievement(event, index) {
-    const newAchievementList = this.state.achievementList.map((item) => {
-      if (item.index === index) {
-        if (item.completed) {
-          item.completed = null
-        } else {
-          item.completed = new Date().getTime()
+  checkAchievement(id) {
+    const achievements = this.state.achievements.map((item) => {
+      if (item.id === id) {
+        let completed = null
+        if (!item.completed) {
+          completed = new Date().getTime()
         }
+        item.completed = completed
+        updateDoc('achievements', item.id, { completed })
       }
       return item
     })
-    this.setState({ achievementList: newAchievementList })
+    const achievementList = achievements.filter((item) => item.type === this.state.focusType.id)
+    this.setState({ achievements, achievementList })
   }
   addType(name) {
-    this.setState({ typeList: this.state.typeList.concat({ name: name, index: (this.state.typeList.length + 1).toString() }) })
+    addDoc('types', { name }).then((result) => {
+      if (result) this.setState({ typeList: this.state.typeList.concat({ name: name, id: result }) })
+    })
   }
   addAchievement(content) {
-    this.setState({ achievementList: [{ content: content, index: (this.state.achievementList.length + 1).toString() }].concat(this.state.achievementList) })
+    const data = { content, type: this.state.focusType.id, created: new Date().getTime() }
+    addDoc('achievements', data).then((result) => {
+      if (result) {
+        this.setState({ achievements: this.state.achievements.concat({ ...data, id: result }) })
+        const achievementList = this.state.achievements.filter((item) => item.type === this.state.focusType.id)
+        this.setState({ achievementList })
+      }
+    })
   }
   render() {
     return (

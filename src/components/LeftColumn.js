@@ -7,7 +7,7 @@ class LeftColumn extends React.Component {
     return (
       <div className="left-column">
         <div className="type-item-container" >
-          {this.props.typeList.map(item => (<TypeItem data={item} focusType={this.props.focusType} onTypeItemClick={this.props.onTypeItemClick} key={item.index} />))}
+          {this.props.typeList.map(item => (<TypeItem data={item} focusType={this.props.focusType} onTypeItemClick={this.props.onTypeItemClick} key={item.id} />))}
           <AddTypeItem addType={this.props.addType} />
         </div>
       </div>
