@@ -1,19 +1,16 @@
 import React from 'react';
-import TypeItemListContainer from '../containers/TypeItemListContainer';
+import TypeItem from './TypeItem';
 import AddTypeItem from './AddTypeItem';
 
-class LeftColumn extends React.Component {
-  render() {
-    return (
-      <div className="left-column">
-        <div className="type-item-container" >
-          {/* {this.props.typeList.map(item => (<TypeItem data={item} focusType={this.props.focusType} onTypeItemClick={this.props.onTypeItemClick} key={item.id} />))} */}
-          <TypeItemListContainer />
-          <AddTypeItem addType={this.props.addType} />
-        </div>
+const LeftColumn = ({ types, focusedType, setFocusedType }) => (
+  <div className="left-column">
+    <div className="type-item-container" >
+      <div>
+        {types && types.map(item => (<TypeItem {...item} focusedType={focusedType} onClick={() => setFocusedType(Object.assign({}, item))} key={item.id} />))}
       </div>
-    );
-  }
-}
+      {/* <AddTypeItem addType={this.props.addType} /> */}
+    </div>
+  </div>
+)
 
 export default LeftColumn;

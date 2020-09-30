@@ -1,10 +1,12 @@
-export default (state = {}, action) => {
-  console.log('reducers', action)
-  switch (action.type) {
-    case 'SET_FOCUS_TYPE_ITEM':
-      state.focusType = action.id
-      return state
-    default:
-      return state
-  }
-}
+import { combineReducers } from 'redux'
+import types from './types'
+import focusedType from './focusedType'
+import achievements from './achievements'
+import focusedAchievement from './focusedAchievement'
+
+export default combineReducers({
+  types,
+  focusedType,
+  achievements,
+  focusedAchievement
+})

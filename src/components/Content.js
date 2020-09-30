@@ -2,7 +2,7 @@ import React from 'react';
 import LeftColumn from './LeftColumn';
 import CenterColumn from './CenterColumn';
 import RightColumn from './RightColumn';
-import { getCollection, addDoc, updateDoc } from './firebase';
+import { getCollection, addDoc, updateDoc } from '../database/firebase';
 
 class Content extends React.Component {
   constructor(props) {
@@ -73,5 +73,13 @@ class Content extends React.Component {
     );
   }
 }
+
+export default Content;
+
+const Content = () => (
+  <div className={['type-item', (focusType && focusType.id === id) ? 'type-item-focus' : null].join(' ')} onClick={onClick}>
+    <span>{name}</span>
+  </div>
+)
 
 export default Content;
