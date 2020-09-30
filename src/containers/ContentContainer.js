@@ -2,8 +2,8 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import LeftColumnContainer from './LeftColumnContainer';
 import CenterColumnContainer from './CenterColumnContainer';
-import RightColumn from '../components/RightColumn';
-import { getCollection, addDoc, updateDoc } from '../database/firebase';
+import RightColumnContainer from './RightColumnContainer';
+import { getCollection } from '../database/firebase';
 import { setTypes, setAchievements } from '../actions'
 
 const ContentContainer = ({ dispatch }) => {
@@ -16,12 +16,11 @@ const ContentContainer = ({ dispatch }) => {
       dispatch(setAchievements(result)))
   });
 
-
   return (
     <div className="content" >
       <LeftColumnContainer />
       <CenterColumnContainer />
-      {/* <RightColumn /> */}
+      <RightColumnContainer />
     </div>
   )
 }

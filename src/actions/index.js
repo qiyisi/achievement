@@ -17,3 +17,19 @@ export const setFocusedAchievement = focusedAchievement => ({
   type: 'SET_FOCUSED_ACHIEVEMENT',
   focusedAchievement
 })
+
+export const addType = itemType => ({
+  type: 'ADD_TYPE',
+  itemType
+})
+
+export const addAchievement = achievement => ({
+  type: 'ADD_ACHIEVEMENT',
+  achievement
+})
+
+export const toggleAchievement = (id, completed) => ({
+  type: 'TOGGLE_ACHIEVEMENT',
+  id,
+  completed
+})

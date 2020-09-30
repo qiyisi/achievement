@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import CenterColumn from '../components/CenterColumn'
-import { setFocusedAchievement } from '../actions'
+import { setFocusedAchievement, addAchievement, toggleAchievement } from '../actions'
+import { addDoc, updateDoc } from '../database/firebase'
 
 const mapStateToProps = state => ({
   achievements: state.achievements,
@@ -9,7 +10,17 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  setFocusedAchievement: focusedAchievement => dispatch(setFocusedAchievement(focusedAchievement))
+  setFocusedAchievement: focusedAchievement => dispatch(setFocusedAchievement(focusedAchievement)),
+  addAchievement: achievement => {
+    addDoc('achievements', achievement).then((result) => {
+      dispatch(addAchievement({ ...achievement, id: result }))
+    })
+  },
+  toggleAchievement: (id, completed) => {
+    updateDoc('achievements', id, { completed }).then(() => {
+      dispatch(toggleAchievement(id, completed))
+    })
+  }
 })
 
 export default connect(

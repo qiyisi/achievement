@@ -1,14 +1,10 @@
 import React from 'react';
 
-class AchievementItem extends React.Component {
-  render() {
-    return (
-      <div className={['achievement-item', (this.props.focusedAchievement && this.props.focusedAchievement.id === this.props.id) ? 'achievement-item-focus' : null].join(' ')} onClick={this.props.onAchievementClick}>
-        <input type="checkbox" className="achievement-item-checkbox" checked={this.props.completed || false} onClick={() => null} onChange={() => null} />
-        <span>{this.props.content}</span>
-      </div>
-    )
-  }
-}
+const AchievementItem = ({ content, id, completed, focusedAchievement, onAchievementClick, onCheckBoxClick }) => (
+  <div className={['achievement-item', (focusedAchievement && focusedAchievement.id === id) ? 'achievement-item-focus' : null].join(' ')} onClick={onAchievementClick}>
+    <input type="checkbox" className="achievement-item-checkbox" checked={completed || false} onChange={onCheckBoxClick} />
+    <span>{content}</span>
+  </div>
+)
 
 export default AchievementItem;
