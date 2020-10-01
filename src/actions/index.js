@@ -33,3 +33,8 @@ export const toggleAchievement = (id, completed) => ({
   id,
   completed
 })
+
+export const deleteAchievement = id => ({
+  type: 'DELETE_ACHIEVEMENT',
+  id
+})

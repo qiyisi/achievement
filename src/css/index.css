@@ -156,7 +156,13 @@ body {
 }
 
 .right-column-box-content {
- margin: 16px;
+  padding: 16px;
+}
+
+.right-column-box-delete {
+  text-align: center;
+  background-color: #db3a29;
+  color: #fff;
 }
 
 .achievement-item-checkbox {

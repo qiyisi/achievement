@@ -17,9 +17,8 @@ const mapDispatchToProps = dispatch => ({
     })
   },
   toggleAchievement: (id, completed) => {
-    updateDoc('achievements', id, { completed }).then(() => {
-      dispatch(toggleAchievement(id, completed))
-    })
+    dispatch(toggleAchievement(id, completed))
+    updateDoc('achievements', id, { completed })
   }
 })
 

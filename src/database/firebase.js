@@ -38,5 +38,11 @@ const updateDoc = (collection, doc, data) => {
   })
 }
 
-export { getCollection, addDoc, updateDoc };
+const deleteDoc = (collection, doc) => {
+  return new Promise((resolve) => {
+    db.collection(collection).doc(doc).delete().then(() => resolve(true))
+  })
+}
+
+export { getCollection, addDoc, updateDoc, deleteDoc };
 

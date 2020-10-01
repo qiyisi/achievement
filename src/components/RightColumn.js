@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const RightColumn = ({ focusedAchievement }) => (
+const RightColumn = ({ focusedAchievement, deleteAchievement }) => (
   (focusedAchievement &&
     <div className="right-column" >
       <div className="right-column-box">
@@ -14,9 +14,14 @@ const RightColumn = ({ focusedAchievement }) => (
           created: {focusedAchievement.created ? tsToString(focusedAchievement.created) : null}
         </div>
       </div>
-      <div className="right-column-box">
+      {focusedAchievement.completed && <div className="right-column-box">
         <div className="right-column-box-content">
           completed: {focusedAchievement.completed ? tsToString(focusedAchievement.completed) : null}
+        </div>
+      </div>}
+      <div className="right-column-box" onClick={() => deleteAchievement(focusedAchievement.id)}>
+        <div className="right-column-box-content right-column-box-delete">
+          delete
         </div>
       </div>
     </div>)
