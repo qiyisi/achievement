@@ -5,6 +5,7 @@ const AddTypeItem = ({ addType }) => {
     if (event.key === 'Enter') {
       const name = event.target.value.trim()
       if (name) addType(name)
+      event.target.value = ''
     }
   }
   return (< div className='type-item add-type-item' >

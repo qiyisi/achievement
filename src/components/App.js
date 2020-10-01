@@ -1,9 +1,13 @@
 import React from 'react';
-import Container from './Container';
+import Header from './Header';
+import ContentContainer from '../containers/ContentContainer'
 
 function App() {
   return (
-    <Container />
+    <div className="container">
+      <Header />
+      <ContentContainer />
+    </div>
   );
 }
 

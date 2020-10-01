@@ -5,6 +5,7 @@ const AddAchievementItem = ({ focusedType, addAchievement }) => {
     if (event.key === 'Enter') {
       const content = event.target.value.trim()
       if (content) addAchievement({ content, type: focusedType.id, created: new Date().getTime() })
+      event.target.value = ''
     }
   }
   return (<div className="add-achievement-item">
