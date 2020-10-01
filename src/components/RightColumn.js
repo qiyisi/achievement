@@ -1,28 +1,22 @@
 import React from 'react';
+import TypeItemSelect from './TypeItemSelect'
 
-
-const RightColumn = ({ focusedAchievement, deleteAchievement }) => (
+const RightColumn = ({ types, focusedAchievement, deleteAchievement, updateAchievement }) => (
   (focusedAchievement &&
     <div className="right-column" >
-      <div className="right-column-box">
-        <div className="right-column-box-content">
-          {focusedAchievement.content}
-        </div>
+      <div className="right-column-box right-column-box-content">
+        {focusedAchievement.content}
       </div>
-      <div className="right-column-box">
-        <div className="right-column-box-content">
-          created: {focusedAchievement.created ? tsToString(focusedAchievement.created) : null}
-        </div>
+      <TypeItemSelect types={types} focusedAchievement={focusedAchievement} updateAchievement={updateAchievement} />
+      <div className="right-column-box right-column-box-content">
+        created: {focusedAchievement.created ? tsToString(focusedAchievement.created) : null}
       </div>
-      {focusedAchievement.completed && <div className="right-column-box">
-        <div className="right-column-box-content">
+      {focusedAchievement.completed &&
+        <div className="right-column-box right-column-box-content">
           completed: {focusedAchievement.completed ? tsToString(focusedAchievement.completed) : null}
-        </div>
-      </div>}
-      <div className="right-column-box" onClick={() => deleteAchievement(focusedAchievement.id)}>
-        <div className="right-column-box-content right-column-box-delete">
-          delete
-        </div>
+        </div>}
+      <div className="right-column-box right-column-box-content right-column-box-delete" onClick={() => deleteAchievement(focusedAchievement.id)}>
+        delete
       </div>
     </div>)
 );

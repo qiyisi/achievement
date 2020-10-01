@@ -151,18 +151,40 @@ body {
 
 .right-column-box {
   margin: 10px;
-  border: 1px solid #EAEAEA;
-  background-color: #fff;
 }
 
 .right-column-box-content {
   padding: 16px;
+  border: 1px solid #EAEAEA;
+  background-color: #fff;
 }
 
 .right-column-box-delete {
   text-align: center;
   background-color: #db3a29;
   color: #fff;
+}
+
+.right-column-box-select {
+  height: 48px;
+}
+
+.right-column-box-select-option-container {
+  position: relative;
+  max-height: 150px;
+  overflow-y: scroll;
+}
+
+.right-column-box-select-option-container div:hover {
+  background-color: #ededed;
+}
+
+.right-column-box-select-background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
 }
 
 .achievement-item-checkbox {
