@@ -21,6 +21,9 @@ const mapDispatchToProps = dispatch => ({
     dispatch(updateAchievement(id, data))
     dispatch(updateFocusedAchievement(data))
     updateDoc('achievements', id, data)
+  },
+  updateFocusedAchievement: (data) => {
+    dispatch(updateFocusedAchievement(data))
   }
 })
 

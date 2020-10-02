@@ -9,7 +9,7 @@ import { setTypes, setAchievements } from '../actions'
 const ContentContainer = ({ dispatch }) => {
 
   useEffect(() => {
-    console.log('useEffect')
+    console.log('init data')
     getCollection('types').then(result =>
       dispatch(setTypes(result)))
     getCollection('achievements').then(result =>
