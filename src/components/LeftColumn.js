@@ -1,16 +1,25 @@
-import React from 'react';
-import TypeItem from './TypeItem';
-import AddTypeItem from './AddTypeItem';
+import React from "react";
+import { useSelector } from "react-redux";
+import TypeItem from "./TypeItem";
+import AddTypeItem from "./AddTypeItem";
 
-const LeftColumn = ({ types, focusedType, setFocusedType, addType }) => (
-  <div className="left-column">
-    <div className="type-item-container" >
-      <div>
-        {types && types.map(item => (<TypeItem {...item} focusedType={focusedType} onClick={() => setFocusedType(Object.assign({}, item))} key={item.id} />))}
+const LeftColumn = () => {
+  const types = useSelector((state) => state.types);
+  const focusedType = useSelector((state) => state.focusedType);
+
+  return (
+    <div className="left-column">
+      <div className="type-item-container">
+        <div>
+          {types &&
+            types.map((item) => (
+              <TypeItem type={item} focusedType={focusedType} key={item.id} />
+            ))}
+        </div>
+        <AddTypeItem />
       </div>
-      <AddTypeItem addType={addType} />
     </div>
-  </div>
-)
+  );
+};
 
 export default LeftColumn;

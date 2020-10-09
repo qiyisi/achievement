@@ -1,10 +1,10 @@
 const focusedType = (state = null, action) => {
   switch (action.type) {
-    case 'SET_FOCUSED_TYPE':
-      return action.focusedType
+    case "SET_FOCUSED_TYPE":
+      return action.focusedType;
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default focusedType
+export default focusedType;

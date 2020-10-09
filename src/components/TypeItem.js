@@ -1,9 +1,21 @@
-import React from 'react';
+import React from "react";
+import { useDispatch } from "react-redux";
+import { setFocusedType } from "../actions";
 
-const TypeItem = ({ name, id, focusedType, onClick }) => (
-  <div className={['type-item', (focusedType && focusedType.id === id) ? 'type-item-focus' : null].join(' ')} onClick={onClick}>
-    <span>{name}</span>
-  </div>
-)
+const TypeItem = ({ type, focusedType }) => {
+  const dispatch = useDispatch();
+
+  return (
+    <div
+      className={[
+        "type-item",
+        focusedType && focusedType.id === type.id ? "type-item-focus" : null,
+      ].join(" ")}
+      onClick={() => dispatch(setFocusedType(type))}
+    >
+      <span>{type.name}</span>
+    </div>
+  );
+};
 
 export default TypeItem;
