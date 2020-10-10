@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 
 function Header() {
   return (
     <header className="header">
-      <div className="header-title">Achievement</div>
+      <div className="header-title">ACHIEVEMENT</div>
     </header>
   );
 }

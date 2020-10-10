@@ -1,16 +1,22 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { updateAchievement, updateFocusedAchievement } from "../actions";
+import { updateAchievement } from "../actions";
 import { updateDoc } from "../database/firebase";
 import { ReactComponent as KeyboardArrowUp } from "../svg/keyboard_arrow_up.svg";
 import { ReactComponent as KeyboardArrowDown } from "../svg/keyboard_arrow_down.svg";
 
 const TypeItemSelect = () => {
   const [showOptions, setShowOptions] = useState(false);
-  const focusedAchievement = useSelector((state) => state.focusedAchievement);
+  const achievements = useSelector((state) => state.achievements);
+  const focusedAchievementId = useSelector(
+    (state) => state.focusedAchievementId
+  );
   const types = useSelector((state) => state.types);
   const dispatch = useDispatch();
 
+  const focusedAchievement = achievements.find(
+    (item) => item.id === focusedAchievementId
+  );
   const type = types.find((item) => item.id === focusedAchievement.type);
 
   const toggleShowOptions = () => {
@@ -21,9 +27,8 @@ const TypeItemSelect = () => {
   };
 
   const selectOption = (id) => {
-    dispatch(updateAchievement(focusedAchievement.id, { type: id }));
-    dispatch(updateFocusedAchievement({ type: id }));
-    updateDoc("achievements", focusedAchievement.id, { type: id });
+    dispatch(updateAchievement(focusedAchievementId, { type: id }));
+    updateDoc("achievements", focusedAchievementId, { type: id });
     setShowOptions(false);
   };
 

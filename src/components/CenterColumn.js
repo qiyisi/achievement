@@ -2,18 +2,28 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import AddAchievementItem from "./AddAchievementItem";
 import AchievementItem from "./AchievementItem";
-import { deleteType, setFocusedType, updateType } from "../actions";
+import {
+  deleteType,
+  setFocusedAchievementId,
+  setFocusedTypeId,
+  updateType,
+} from "../actions";
 import { deleteDoc, updateDoc } from "../database/firebase";
 import { ReactComponent as SVGDelete } from "../svg/delete.svg";
 
 const CenterColumn = () => {
+  const types = useSelector((state) => state.types);
   const achievements = useSelector((state) => state.achievements);
-  const focusedType = useSelector((state) => state.focusedType);
-  const focusedAchievement = useSelector((state) => state.focusedAchievement);
+  const focusedTypeId = useSelector((state) => state.focusedTypeId);
+  const focusedAchievementId = useSelector(
+    (state) => state.focusedAchievementId
+  );
   const dispatch = useDispatch();
 
+  const focusedType = types.find((item) => item.id === focusedTypeId);
+
   const achievementList = achievements
-    .filter((item) => focusedType && item.type === focusedType.id)
+    .filter((item) => focusedTypeId && item.type === focusedTypeId)
     .sort((a, b) => {
       if (!!a.completed && !!a.completed === !!b.completed) {
         return b.completed - a.completed;
@@ -26,9 +36,10 @@ const CenterColumn = () => {
 
   const onDeleteType = () => {
     if (window.confirm("delete?")) {
-      deleteDoc("types", focusedType.id).then(() => {
-        dispatch(deleteType(focusedType.id));
-        dispatch(setFocusedType(null));
+      deleteDoc("types", focusedTypeId).then(() => {
+        dispatch(setFocusedAchievementId(null));
+        dispatch(setFocusedTypeId(null));
+        dispatch(deleteType(focusedTypeId));
       });
     }
   };
@@ -46,12 +57,12 @@ const CenterColumn = () => {
 
   const updateTypeName = (name) => {
     name = name.trim();
-    dispatch(updateType(focusedType.id, { name }));
-    updateDoc("types", focusedType.id, { name });
+    dispatch(updateType(focusedTypeId, { name }));
+    updateDoc("types", focusedTypeId, { name });
   };
 
   return (
-    focusedType && (
+    focusedTypeId && (
       <div className="center-column">
         <div className="type-header">
           <div
@@ -73,7 +84,7 @@ const CenterColumn = () => {
             {achievementList.map((item) => (
               <AchievementItem
                 achievement={item}
-                focusedAchievement={focusedAchievement}
+                focusedAchievementId={focusedAchievementId}
                 key={item.id}
               />
             ))}

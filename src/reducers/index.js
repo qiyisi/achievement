@@ -1,12 +1,12 @@
 import { combineReducers } from "redux";
 import types from "./types";
-import focusedType from "./focusedType";
+import focusedTypeId from "./focusedTypeId";
 import achievements from "./achievements";
-import focusedAchievement from "./focusedAchievement";
+import focusedAchievementId from "./focusedAchievementId";
 
 export default combineReducers({
   types,
-  focusedType,
+  focusedTypeId,
   achievements,
-  focusedAchievement,
+  focusedAchievementId,
 });

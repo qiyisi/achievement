@@ -1,11 +1,11 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { setFocusedAchievement, toggleAchievement } from "../actions";
+import { setFocusedAchievementId, toggleAchievement } from "../actions";
 import { updateDoc } from "../database/firebase";
 import { ReactComponent as SVGCheckCircle } from "../svg/check_circle.svg";
 import { ReactComponent as SVGRadioButtonUnchecked } from "../svg/radio_button_unchecked.svg";
 
-const AchievementItem = ({ achievement, focusedAchievement }) => {
+const AchievementItem = ({ achievement, focusedAchievementId }) => {
   const dispatch = useDispatch();
 
   const onCheckBoxClick = (event) => {
@@ -19,11 +19,11 @@ const AchievementItem = ({ achievement, focusedAchievement }) => {
     <div
       className={[
         "achievement-item",
-        focusedAchievement && focusedAchievement.id === achievement.id
+        focusedAchievementId && focusedAchievementId === achievement.id
           ? "achievement-item-focus"
           : null,
       ].join(" ")}
-      onClick={() => dispatch(setFocusedAchievement(achievement))}
+      onClick={() => dispatch(setFocusedAchievementId(achievement.id))}
     >
       <div>
         <div onClick={onCheckBoxClick}>

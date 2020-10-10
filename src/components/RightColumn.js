@@ -3,23 +3,29 @@ import { useSelector, useDispatch } from "react-redux";
 import TypeItemSelect from "./TypeItemSelect";
 import {
   deleteAchievement,
-  deleteFocusedAchievement,
   updateAchievement,
-  updateFocusedAchievement,
+  setFocusedAchievementId,
 } from "../actions";
 import { deleteDoc, updateDoc } from "../database/firebase";
 import { ReactComponent as SVGDelete } from "../svg/delete.svg";
 import { ReactComponent as SVGExitToApp } from "../svg/exit_to_app.svg";
 
 const RightColumn = () => {
-  const focusedAchievement = useSelector((state) => state.focusedAchievement);
+  const achievements = useSelector((state) => state.achievements);
+  const focusedAchievementId = useSelector(
+    (state) => state.focusedAchievementId
+  );
   const dispatch = useDispatch();
+
+  const focusedAchievement = achievements.find(
+    (item) => item.id == focusedAchievementId
+  );
 
   const onDeleteAchievement = () => {
     if (window.confirm("delete?")) {
-      deleteDoc("achievements", focusedAchievement.id).then(() => {
-        dispatch(deleteAchievement(focusedAchievement.id));
-        dispatch(deleteFocusedAchievement());
+      deleteDoc("achievements", focusedAchievementId).then(() => {
+        dispatch(setFocusedAchievementId(null));
+        dispatch(deleteAchievement(focusedAchievementId));
       });
     }
   };
@@ -37,19 +43,18 @@ const RightColumn = () => {
 
   const updateAchievementContent = (content) => {
     content = content.trim();
-    dispatch(updateAchievement(focusedAchievement.id, { content }));
-    dispatch(updateFocusedAchievement({ content }));
-    updateDoc("achievements", focusedAchievement.id, { content });
+    dispatch(updateAchievement(focusedAchievementId, { content }));
+    updateDoc("achievements", focusedAchievementId, { content });
   };
 
   return (
-    focusedAchievement && (
+    focusedAchievementId && (
       <div className="right-column">
         <div className="right-column-header">
           <div className="svg-button">
             <SVGExitToApp
               onClick={() => {
-                dispatch(deleteFocusedAchievement());
+                dispatch(setFocusedAchievementId(null));
               }}
             />
           </div>

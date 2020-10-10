@@ -5,7 +5,7 @@ import AddTypeItem from "./AddTypeItem";
 
 const LeftColumn = () => {
   const types = useSelector((state) => state.types);
-  const focusedType = useSelector((state) => state.focusedType);
+  const focusedTypeId = useSelector((state) => state.focusedTypeId);
 
   return (
     <div className="left-column">
@@ -13,7 +13,11 @@ const LeftColumn = () => {
         <div>
           {types &&
             types.map((item) => (
-              <TypeItem type={item} focusedType={focusedType} key={item.id} />
+              <TypeItem
+                type={item}
+                focusedTypeId={focusedTypeId}
+                key={item.id}
+              />
             ))}
         </div>
         <AddTypeItem />

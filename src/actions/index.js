@@ -3,9 +3,9 @@ export const setTypes = (types) => ({
   types,
 });
 
-export const setFocusedType = (focusedType) => ({
-  type: "SET_FOCUSED_TYPE",
-  focusedType,
+export const setFocusedTypeId = (id) => ({
+  type: "SET_FOCUSED_TYPE_ID",
+  id,
 });
 
 export const updateType = (id, data) => ({
@@ -19,18 +19,9 @@ export const setAchievements = (achievements) => ({
   achievements,
 });
 
-export const setFocusedAchievement = (focusedAchievement) => ({
-  type: "SET_FOCUSED_ACHIEVEMENT",
-  focusedAchievement,
-});
-
-export const updateFocusedAchievement = (data) => ({
-  type: "UPDATE_FOCUSED_ACHIEVEMENT",
-  data,
-});
-
-export const deleteFocusedAchievement = () => ({
-  type: "DELETE_FOCUSED_ACHIEVEMENT",
+export const setFocusedAchievementId = (id) => ({
+  type: "SET_FOCUSED_ACHIEVEMENT_ID",
+  id,
 });
 
 export const addType = (itemType) => ({

@@ -5,7 +5,7 @@ import { addDoc } from "../database/firebase";
 import { ReactComponent as SVGAdd } from "../svg/add.svg";
 
 const AddAchievementItem = () => {
-  const focusedType = useSelector((state) => state.focusedType);
+  const focusedTypeId = useSelector((state) => state.focusedTypeId);
   const dispatch = useDispatch();
 
   const onEnterKeyPress = (event) => {
@@ -14,7 +14,7 @@ const AddAchievementItem = () => {
       if (content) {
         const achievement = {
           content,
-          type: focusedType.id,
+          type: focusedTypeId,
           created: new Date().getTime(),
         };
         addDoc("achievements", achievement).then((id) => {

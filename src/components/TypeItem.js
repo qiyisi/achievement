@@ -1,18 +1,18 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { setFocusedType } from "../actions";
+import { setFocusedTypeId } from "../actions";
 import { ReactComponent as SVGList } from "../svg/list.svg";
 
-const TypeItem = ({ type, focusedType }) => {
+const TypeItem = ({ type, focusedTypeId }) => {
   const dispatch = useDispatch();
 
   return (
     <div
       className={[
         "type-item",
-        focusedType && focusedType.id === type.id ? "type-item-focus" : null,
+        focusedTypeId && focusedTypeId === type.id ? "type-item-focus" : null,
       ].join(" ")}
-      onClick={() => dispatch(setFocusedType(type))}
+      onClick={() => dispatch(setFocusedTypeId(type.id))}
     >
       <div>
         <SVGList />
