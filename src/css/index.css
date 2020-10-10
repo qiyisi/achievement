@@ -75,10 +75,20 @@ body {
   align-items: center;
 }
 
+.type-item > div svg {
+  flex-shrink: 0;
+}
+
 .type-item > div span {
   margin-left: 5px;
   height: 100%;
   overflow: hidden;
+  flex-grow: 1;
+}
+
+.type-item > div div {
+  flex: 0 0;
+  font-size: 12px;
 }
 
 .type-item-focus {

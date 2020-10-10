@@ -20,10 +20,17 @@ const CenterColumn = () => {
   );
   const dispatch = useDispatch();
 
-  const focusedType = types.find((item) => item.id === focusedTypeId);
+  const focusedType =
+    focusedTypeId === "0"
+      ? { name: "uncategorized", id: "0" }
+      : types.find((item) => item.id === focusedTypeId);
 
   const achievementList = achievements
-    .filter((item) => focusedTypeId && item.type === focusedTypeId)
+    .filter((item) =>
+      focusedTypeId === "0"
+        ? !types.find((it) => it.id === item.type)
+        : focusedTypeId && item.type === focusedTypeId
+    )
     .sort((a, b) => {
       if (!!a.completed && !!a.completed === !!b.completed) {
         return b.completed - a.completed;
@@ -67,16 +74,18 @@ const CenterColumn = () => {
         <div className="type-header">
           <div
             className="type-header-label"
-            contentEditable="true"
+            contentEditable={focusedTypeId !== "0"}
             suppressContentEditableWarning={true}
             onKeyPress={onEnterKeyPress}
             onBlur={onBlur}
           >
             {focusedType.name}
           </div>
-          <div className="svg-button" onClick={onDeleteType}>
-            <SVGDelete />
-          </div>
+          {focusedTypeId !== "0" && (
+            <div className="svg-button" onClick={onDeleteType}>
+              <SVGDelete />
+            </div>
+          )}
         </div>
         <div className="achievement-item-container">
           <AddAchievementItem />

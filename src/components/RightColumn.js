@@ -18,7 +18,7 @@ const RightColumn = () => {
   const dispatch = useDispatch();
 
   const focusedAchievement = achievements.find(
-    (item) => item.id == focusedAchievementId
+    (item) => item.id === focusedAchievementId
   );
 
   const onDeleteAchievement = () => {

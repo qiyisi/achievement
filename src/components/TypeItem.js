@@ -3,8 +3,10 @@ import { useDispatch } from "react-redux";
 import { setFocusedTypeId } from "../actions";
 import { ReactComponent as SVGList } from "../svg/list.svg";
 
-const TypeItem = ({ type, focusedTypeId }) => {
+const TypeItem = ({ type, focusedTypeId, data }) => {
   const dispatch = useDispatch();
+
+  console.log({ data });
 
   return (
     <div
@@ -17,6 +19,13 @@ const TypeItem = ({ type, focusedTypeId }) => {
       <div>
         <SVGList />
         <span>{type.name}</span>
+        <div>
+          {data && (
+            <span>
+              {data.completed}/{data.total}
+            </span>
+          )}
+        </div>
       </div>
     </div>
   );
