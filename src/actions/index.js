@@ -1,27 +1,14 @@
+// type
+
 export const setTypes = (types) => ({
   type: "SET_TYPES",
   types,
-});
-
-export const setFocusedTypeId = (id) => ({
-  type: "SET_FOCUSED_TYPE_ID",
-  id,
 });
 
 export const updateType = (id, data) => ({
   type: "UPDATE_TYPE",
   id,
   data,
-});
-
-export const setAchievements = (achievements) => ({
-  type: "SET_ACHIEVEMENTS",
-  achievements,
-});
-
-export const setFocusedAchievementId = (id) => ({
-  type: "SET_FOCUSED_ACHIEVEMENT_ID",
-  id,
 });
 
 export const addType = (itemType) => ({
@@ -32,6 +19,20 @@ export const addType = (itemType) => ({
 export const deleteType = (id) => ({
   type: "DELETE_TYPE",
   id,
+});
+
+// focusedTypeId
+
+export const setFocusedTypeId = (id) => ({
+  type: "SET_FOCUSED_TYPE_ID",
+  id,
+});
+
+// achievement
+
+export const setAchievements = (achievements) => ({
+  type: "SET_ACHIEVEMENTS",
+  achievements,
 });
 
 export const addAchievement = (achievement) => ({
@@ -54,4 +55,11 @@ export const updateAchievement = (id, data) => ({
   type: "UPDATE_ACHIEVEMENT",
   id,
   data,
+});
+
+// achievementId
+
+export const setFocusedAchievementId = (id) => ({
+  type: "SET_FOCUSED_ACHIEVEMENT_ID",
+  id,
 });

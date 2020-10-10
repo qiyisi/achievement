@@ -34,11 +34,13 @@ body {
   height: calc(100% - 48px);
   display: flex;
   flex-direction: row;
+  overflow-x: scroll;
 }
 
 .left-column {
   background-color: #f4f4f4;
-  flex: 0 0 290px;
+  flex: 0 0 auto;
+  width: 290px;
   border-right: 1px solid #eaeaea;
 }
 
@@ -50,9 +52,12 @@ body {
 
 .right-column {
   background-color: #f4f4f4;
-  flex: 0 0 360px;
+  flex: 0 0 auto;
+  width: 360px;
   border-left: 1px solid #eaeaea;
 }
+
+/* type item */
 
 .type-item-container {
   margin-top: 60px;
@@ -79,14 +84,17 @@ body {
   flex-shrink: 0;
 }
 
-.type-item > div span {
+.type-item-name {
   margin-left: 5px;
+  margin-right: 5px;
   height: 100%;
   overflow: hidden;
+  text-overflow: ellipsis;
   flex-grow: 1;
+  white-space: nowrap;
 }
 
-.type-item > div div {
+.type-item-count {
   flex: 0 0;
   font-size: 12px;
 }
@@ -100,6 +108,8 @@ body {
   fill: #0078d7;
 }
 
+/* add type item */
+
 .add-type-item {
   outline: 0;
 }
@@ -112,6 +122,8 @@ body {
   font-family: "Microsoft Yahei", "微软雅黑", sans-serif;
   font-size: 1em;
 }
+
+/* type header */
 
 .type-header {
   display: flex;
@@ -128,12 +140,54 @@ body {
   flex-grow: 1;
 }
 
+/* achievement item */
+
 .achievement-item-container {
   display: flex;
   flex-direction: column;
   flex: 1 1 auto;
   overflow: scroll;
 }
+
+.achievement-list {
+  flex: 1 1 auto;
+  overflow: scroll;
+}
+
+.achievement-item {
+  flex: 0 0;
+  margin: 0 16px;
+  border-bottom: 1px solid #eaeaea;
+  min-height: 46px;
+  padding: 12px 12px;
+  display: flex;
+  align-items: center;
+}
+
+.achievement-item:hover {
+  background-color: #ededed;
+}
+
+.achievement-item-focus {
+  background-color: #ededed;
+}
+
+.achievement-item > div {
+  display: flex;
+  align-items: center;
+}
+
+.achievement-item > div div {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.achievement-item > div span {
+  margin-left: 5px;
+}
+
+/* add achievement item */
 
 .add-achievement-item {
   flex: 0 0;
@@ -162,42 +216,7 @@ body {
   height: 46px;
 }
 
-.achievement-list {
-  flex: 1 1 auto;
-  overflow: scroll;
-}
-
-.achievement-item {
-  flex: 0 0;
-  margin: 0 16px;
-  border-bottom: 1px solid #eaeaea;
-  height: 46px;
-  display: flex;
-  align-items: center;
-}
-
-.achievement-item:hover {
-  background-color: #ededed;
-}
-
-.achievement-item-focus {
-  background-color: #ededed;
-}
-
-.achievement-item > div {
-  display: flex;
-  align-items: center;
-}
-
-.achievement-item > div div {
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-}
-
-.achievement-item > div span {
-  margin-left: 5px;
-}
+/* right column box */
 
 .right-column-box {
   margin: 10px;
@@ -216,6 +235,16 @@ body {
   justify-content: space-between;
   padding-top: 15px;
   padding-bottom: 15px;
+}
+
+.right-column-box-select-content svg {
+  flex-shrink: 0;
+}
+
+.right-column-box-select-label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .right-column-box-delete {
@@ -264,6 +293,8 @@ body {
   justify-content: space-between;
   padding: 0 20px;
 }
+
+/* svg button */
 
 .svg-button {
   height: 30px;

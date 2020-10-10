@@ -38,7 +38,9 @@ const TypeItemSelect = () => {
         className="right-column-box-content right-column-box-select-content"
         onClick={toggleShowOptions}
       >
-        <div>{type ? type.name : "uncategorized"}</div>
+        <div className="right-column-box-select-label">
+          {type ? type.name : "uncategorized"}
+        </div>
         {!showOptions && <KeyboardArrowDown />}
         {showOptions && <KeyboardArrowUp />}
       </div>

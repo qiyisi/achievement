@@ -23,8 +23,6 @@ const LeftColumn = () => {
     return accumulator;
   }, {});
 
-  console.log({ typesData });
-
   return (
     <div className="left-column">
       <div className="type-item-container">

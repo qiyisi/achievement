@@ -6,8 +6,6 @@ import { ReactComponent as SVGList } from "../svg/list.svg";
 const TypeItem = ({ type, focusedTypeId, data }) => {
   const dispatch = useDispatch();
 
-  console.log({ data });
-
   return (
     <div
       className={[
@@ -18,8 +16,8 @@ const TypeItem = ({ type, focusedTypeId, data }) => {
     >
       <div>
         <SVGList />
-        <span>{type.name}</span>
-        <div>
+        <div className="type-item-name">{type.name}</div>
+        <div className="type-item-count">
           {data && (
             <span>
               {data.completed}/{data.total}
