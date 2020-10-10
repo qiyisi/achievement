@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { updateAchievement, updateFocusedAchievement } from "../actions";
 import { updateDoc } from "../database/firebase";
+import { ReactComponent as KeyboardArrowUp } from "../svg/keyboard_arrow_up.svg";
+import { ReactComponent as KeyboardArrowDown } from "../svg/keyboard_arrow_down.svg";
 
 const TypeItemSelect = () => {
   const [showOptions, setShowOptions] = useState(false);
@@ -27,8 +29,13 @@ const TypeItemSelect = () => {
 
   return (
     <div className="right-column-box right-column-box-select">
-      <div className="right-column-box-content" onClick={toggleShowOptions}>
-        {type ? type.name : focusedAchievement.type}
+      <div
+        className="right-column-box-content right-column-box-select-content"
+        onClick={toggleShowOptions}
+      >
+        <div>{type ? type.name : focusedAchievement.type}</div>
+        {!showOptions && <KeyboardArrowDown />}
+        {showOptions && <KeyboardArrowUp />}
       </div>
       {showOptions && (
         <div>

@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import TypeItemSelect from "./TypeItemSelect";
 import { deleteAchievement, deleteFocusedAchievement } from "../actions";
 import { deleteDoc } from "../database/firebase";
+import { ReactComponent as SVGDelete } from "../svg/delete.svg";
+import { ReactComponent as SVGExitToApp } from "../svg/exit_to_app.svg";
 
 const RightColumn = () => {
   const focusedAchievement = useSelector((state) => state.focusedAchievement);
@@ -20,6 +22,18 @@ const RightColumn = () => {
   return (
     focusedAchievement && (
       <div className="right-column">
+        <div className="right-column-header">
+          <div className="svg-button">
+            <SVGExitToApp
+              onClick={() => {
+                dispatch(deleteFocusedAchievement());
+              }}
+            />
+          </div>
+          <div className="svg-button" onClick={onDeleteAchievement}>
+            <SVGDelete />
+          </div>
+        </div>
         <div className="right-column-box right-column-box-content">
           {focusedAchievement.content}
         </div>
@@ -38,12 +52,12 @@ const RightColumn = () => {
               : null}
           </div>
         )}
-        <div
+        {/* <div
           className="right-column-box right-column-box-content right-column-box-delete"
           onClick={onDeleteAchievement}
         >
           delete
-        </div>
+        </div> */}
       </div>
     )
   );

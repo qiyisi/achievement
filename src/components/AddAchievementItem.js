@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addAchievement } from "../actions";
 import { addDoc } from "../database/firebase";
+import { ReactComponent as SVGAdd } from "../svg/add.svg";
 
 const AddAchievementItem = () => {
   const focusedType = useSelector((state) => state.focusedType);
@@ -25,13 +26,16 @@ const AddAchievementItem = () => {
   };
   return (
     <div className="add-achievement-item">
-      <span>
-        <input
-          className="add-achievement-item-input"
-          placeholder="add"
-          onKeyPress={onEnterKeyPress}
-        />
-      </span>
+      <div>
+        <SVGAdd />
+        <div>
+          <input
+            className="add-achievement-item-input"
+            placeholder="add"
+            onKeyPress={onEnterKeyPress}
+          />
+        </div>
+      </div>
     </div>
   );
 };

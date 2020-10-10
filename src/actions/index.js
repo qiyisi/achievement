@@ -32,6 +32,11 @@ export const addType = (itemType) => ({
   itemType,
 });
 
+export const deleteType = (id) => ({
+  type: "DELETE_TYPE",
+  id,
+});
+
 export const addAchievement = (achievement) => ({
   type: "ADD_ACHIEVEMENT",
   achievement,

@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { setFocusedType } from "../actions";
+import { ReactComponent as SVGList } from "../svg/list.svg";
 
 const TypeItem = ({ type, focusedType }) => {
   const dispatch = useDispatch();
@@ -13,7 +14,10 @@ const TypeItem = ({ type, focusedType }) => {
       ].join(" ")}
       onClick={() => dispatch(setFocusedType(type))}
     >
-      <span>{type.name}</span>
+      <div>
+        <SVGList />
+        <span>{type.name}</span>
+      </div>
     </div>
   );
 };

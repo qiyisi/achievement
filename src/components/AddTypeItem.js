@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { addType } from "../actions";
 import { addDoc } from "../database/firebase";
+import { ReactComponent as SVGAdd } from "../svg/add.svg";
 
 const AddTypeItem = () => {
   const dispatch = useDispatch();
@@ -18,13 +19,16 @@ const AddTypeItem = () => {
   };
   return (
     <div className="type-item add-type-item">
-      <span>
-        <input
-          className="add-type-item-input"
-          placeholder="add"
-          onKeyPress={onEnterKeyPress}
-        />
-      </span>
+      <div>
+        <SVGAdd />
+        <span>
+          <input
+            className="add-type-item-input"
+            placeholder="add"
+            onKeyPress={onEnterKeyPress}
+          />
+        </span>
+      </div>
     </div>
   );
 };
