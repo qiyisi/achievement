@@ -2,8 +2,8 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import AddAchievementItem from "./AddAchievementItem";
 import AchievementItem from "./AchievementItem";
-import { deleteType, setFocusedType } from "../actions";
-import { deleteDoc } from "../database/firebase";
+import { deleteType, setFocusedType, updateType } from "../actions";
+import { deleteDoc, updateDoc } from "../database/firebase";
 import { ReactComponent as SVGDelete } from "../svg/delete.svg";
 
 const CenterColumn = () => {
@@ -33,11 +33,36 @@ const CenterColumn = () => {
     }
   };
 
+  const onEnterKeyPress = (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      event.target.blur();
+    }
+  };
+
+  const onBlur = (event) => {
+    updateTypeName(event.target.innerText);
+  };
+
+  const updateTypeName = (name) => {
+    name = name.trim();
+    dispatch(updateType(focusedType.id, { name }));
+    updateDoc("types", focusedType.id, { name });
+  };
+
   return (
     focusedType && (
       <div className="center-column">
         <div className="type-header">
-          <div className="type-header-label">{focusedType.name}</div>
+          <div
+            className="type-header-label"
+            contentEditable="true"
+            suppressContentEditableWarning={true}
+            onKeyPress={onEnterKeyPress}
+            onBlur={onBlur}
+          >
+            {focusedType.name}
+          </div>
           <div className="svg-button" onClick={onDeleteType}>
             <SVGDelete />
           </div>

@@ -6,6 +6,13 @@ const types = (state = [], action) => {
       return [...state, action.itemType];
     case "DELETE_TYPE":
       return state.filter((item) => item.id !== action.id);
+    case "UPDATE_TYPE":
+      return state.map((item) => {
+        if (item.id === action.id) {
+          item = { ...item, ...action.data };
+        }
+        return item;
+      });
     default:
       return state;
   }

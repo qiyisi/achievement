@@ -8,7 +8,8 @@ import { ReactComponent as SVGRadioButtonUnchecked } from "../svg/radio_button_u
 const AchievementItem = ({ achievement, focusedAchievement }) => {
   const dispatch = useDispatch();
 
-  const onCheckBoxClick = () => {
+  const onCheckBoxClick = (event) => {
+    event.stopPropagation();
     const completed = achievement.completed ? null : new Date().getTime();
     dispatch(toggleAchievement(achievement.id, completed));
     updateDoc("achievements", achievement.id, { completed });

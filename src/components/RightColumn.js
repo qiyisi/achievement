@@ -1,8 +1,13 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import TypeItemSelect from "./TypeItemSelect";
-import { deleteAchievement, deleteFocusedAchievement } from "../actions";
-import { deleteDoc } from "../database/firebase";
+import {
+  deleteAchievement,
+  deleteFocusedAchievement,
+  updateAchievement,
+  updateFocusedAchievement,
+} from "../actions";
+import { deleteDoc, updateDoc } from "../database/firebase";
 import { ReactComponent as SVGDelete } from "../svg/delete.svg";
 import { ReactComponent as SVGExitToApp } from "../svg/exit_to_app.svg";
 
@@ -17,6 +22,24 @@ const RightColumn = () => {
         dispatch(deleteFocusedAchievement());
       });
     }
+  };
+
+  const onEnterKeyPress = (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      event.target.blur();
+    }
+  };
+
+  const onBlur = (event) => {
+    updateAchievementContent(event.target.innerText);
+  };
+
+  const updateAchievementContent = (content) => {
+    content = content.trim();
+    dispatch(updateAchievement(focusedAchievement.id, { content }));
+    dispatch(updateFocusedAchievement({ content }));
+    updateDoc("achievements", focusedAchievement.id, { content });
   };
 
   return (
@@ -34,7 +57,13 @@ const RightColumn = () => {
             <SVGDelete />
           </div>
         </div>
-        <div className="right-column-box right-column-box-content">
+        <div
+          className="right-column-box right-column-box-content"
+          contentEditable="true"
+          suppressContentEditableWarning={true}
+          onKeyPress={onEnterKeyPress}
+          onBlur={onBlur}
+        >
           {focusedAchievement.content}
         </div>
         <TypeItemSelect />
@@ -52,12 +81,6 @@ const RightColumn = () => {
               : null}
           </div>
         )}
-        {/* <div
-          className="right-column-box right-column-box-content right-column-box-delete"
-          onClick={onDeleteAchievement}
-        >
-          delete
-        </div> */}
       </div>
     )
   );

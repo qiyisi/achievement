@@ -86,6 +86,10 @@ body {
   color: #0078d7;
 }
 
+.type-item-focus svg {
+  fill: #0078d7;
+}
+
 .add-type-item {
   outline: 0;
 }
@@ -110,6 +114,8 @@ body {
   padding: 24px 32px;
   color: #0078d7;
   font-size: 1.4em;
+  outline: none;
+  flex-grow: 1;
 }
 
 .achievement-item-container {

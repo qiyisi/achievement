@@ -8,6 +8,12 @@ export const setFocusedType = (focusedType) => ({
   focusedType,
 });
 
+export const updateType = (id, data) => ({
+  type: "UPDATE_TYPE",
+  id,
+  data,
+});
+
 export const setAchievements = (achievements) => ({
   type: "SET_ACHIEVEMENTS",
   achievements,
