@@ -63,3 +63,9 @@ export const setFocusedAchievementId = (id) => ({
   type: "SET_FOCUSED_ACHIEVEMENT_ID",
   id,
 });
+
+// setting
+export const updateSettings = (data) => ({
+  type: "UPDATE_SETTINGS",
+  data,
+});

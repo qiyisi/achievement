@@ -2,11 +2,19 @@ import React from "react";
 import { useSelector } from "react-redux";
 import TypeItem from "./TypeItem";
 import AddTypeItem from "./AddTypeItem";
+import HiddenTypeItem from "./HiddenTypeItem";
 
 const LeftColumn = () => {
   const types = useSelector((state) => state.types);
   const achievements = useSelector((state) => state.achievements);
   const focusedTypeId = useSelector((state) => state.focusedTypeId);
+  const settings = useSelector((state) => state.settings);
+
+  const showTypes = [];
+  const hiddenTypes = [];
+  types.forEach((item) => {
+    item.hidden ? hiddenTypes.push(item) : showTypes.push(item);
+  });
 
   const typesData = achievements.reduce((accumulator, currentValue) => {
     const type = types.find((item) => item.id === currentValue.type);
@@ -27,8 +35,8 @@ const LeftColumn = () => {
     <div className="left-column">
       <div className="type-item-container">
         <div>
-          {types &&
-            types.map((item) => (
+          {showTypes &&
+            showTypes.map((item) => (
               <TypeItem
                 type={item}
                 focusedTypeId={focusedTypeId}
@@ -46,6 +54,17 @@ const LeftColumn = () => {
           />
         )}
         <AddTypeItem />
+        <HiddenTypeItem />
+        {settings.showHiddenTypeItems &&
+          hiddenTypes &&
+          hiddenTypes.map((item) => (
+            <TypeItem
+              type={item}
+              focusedTypeId={focusedTypeId}
+              key={item.id}
+              data={typesData[item.id]}
+            />
+          ))}
       </div>
     </div>
   );

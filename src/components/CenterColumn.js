@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import AddAchievementItem from "./AddAchievementItem";
 import AchievementItem from "./AchievementItem";
+import CompletedAchievementItem from "./CompletedAchievementItem";
 import {
   deleteType,
   setFocusedAchievementId,
@@ -10,6 +11,8 @@ import {
 } from "../actions";
 import { deleteDoc, updateDoc } from "../database/firebase";
 import { ReactComponent as SVGDelete } from "../svg/delete.svg";
+import { ReactComponent as SVGVisibility } from "../svg/visibility.svg";
+import { ReactComponent as SVGVisibilityOff } from "../svg/visibility_off.svg";
 
 const CenterColumn = () => {
   const types = useSelector((state) => state.types);
@@ -18,6 +21,7 @@ const CenterColumn = () => {
   const focusedAchievementId = useSelector(
     (state) => state.focusedAchievementId
   );
+  const settings = useSelector((state) => state.settings);
   const dispatch = useDispatch();
 
   const focusedType =
@@ -25,7 +29,7 @@ const CenterColumn = () => {
       ? { name: "uncategorized", id: "0" }
       : types.find((item) => item.id === focusedTypeId);
 
-  const achievementList = achievements
+  const allAchievementList = achievements
     .filter((item) =>
       focusedTypeId === "0"
         ? !types.find((it) => it.id === item.type)
@@ -40,6 +44,21 @@ const CenterColumn = () => {
         return a.completed ? 1 : -1;
       }
     });
+
+  const achievementList = [];
+  const completedAchievementList = [];
+
+  allAchievementList.forEach((item) => {
+    item.completed
+      ? completedAchievementList.push(item)
+      : achievementList.push(item);
+  });
+
+  const onToggleHidden = () => {
+    const hidden = focusedType.hidden;
+    dispatch(updateType(focusedTypeId, { hidden: !hidden }));
+    updateDoc("types", focusedTypeId, { hidden: !hidden });
+  };
 
   const onDeleteType = () => {
     if (window.confirm("delete?")) {
@@ -82,8 +101,21 @@ const CenterColumn = () => {
             {focusedType.name}
           </div>
           {focusedTypeId !== "0" && (
-            <div className="svg-button" onClick={onDeleteType}>
-              <SVGDelete />
+            <div className="type-header-button-container">
+              <div onClick={onToggleHidden}>
+                {focusedType.hidden ? (
+                  <div className="svg-button">
+                    <SVGVisibility />
+                  </div>
+                ) : (
+                  <div className="svg-button">
+                    <SVGVisibilityOff />
+                  </div>
+                )}
+              </div>
+              <div className="svg-button" onClick={onDeleteType}>
+                <SVGDelete />
+              </div>
             </div>
           )}
         </div>
@@ -97,6 +129,15 @@ const CenterColumn = () => {
                 key={item.id}
               />
             ))}
+            <CompletedAchievementItem />
+            {settings.showCompletedAchievements &&
+              completedAchievementList.map((item) => (
+                <AchievementItem
+                  achievement={item}
+                  focusedAchievementId={focusedAchievementId}
+                  key={item.id}
+                />
+              ))}
           </div>
         </div>
       </div>

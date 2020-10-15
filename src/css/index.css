@@ -116,6 +116,7 @@ body {
 
 .add-type-item-input {
   flex-grow: 1;
+  margin: 0 5px;
   outline: 0;
   border: 0;
   background-color: transparent;
@@ -138,6 +139,11 @@ body {
   font-size: 1.4em;
   outline: none;
   flex-grow: 1;
+}
+
+.type-header-button-container {
+  display: flex;
+  gap: 4px;
 }
 
 /* achievement item */
@@ -215,6 +221,16 @@ body {
   font-family: "Microsoft Yahei", "微软雅黑", sans-serif;
   font-size: 1em;
   height: 46px;
+}
+
+/* completed achievement item */
+
+.completed-achievement-item {
+  border: none;
+}
+
+.completed-achievement-item:hover {
+  background: transparent;
 }
 
 /* right column box */
@@ -312,4 +328,10 @@ body {
 
 .svg-button:active {
   background-color: #eaeaea;
+}
+
+/* others */
+
+.flex {
+  display: flex;
 }
