@@ -65,7 +65,22 @@ export const setFocusedAchievementId = (id) => ({
 });
 
 // setting
+
 export const updateSettings = (data) => ({
   type: "UPDATE_SETTINGS",
   data,
+});
+
+// draggedTypeId
+
+export const setDraggedTypeId = (id) => ({
+  type: "SET_DRAGGED_TYPE_ID",
+  id,
+});
+
+// draggedAchievementId
+
+export const setDraggedAchievementId = (id) => ({
+  type: "SET_DRAGGED_ACHIEVEMENT_ID",
+  id,
 });

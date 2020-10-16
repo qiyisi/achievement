@@ -1,14 +1,18 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { updateType } from "../actions";
 import TypeItem from "./TypeItem";
 import AddTypeItem from "./AddTypeItem";
 import HiddenTypeItem from "./HiddenTypeItem";
+import { updateDoc } from "../database/firebase";
 
 const LeftColumn = () => {
   const types = useSelector((state) => state.types);
   const achievements = useSelector((state) => state.achievements);
   const focusedTypeId = useSelector((state) => state.focusedTypeId);
   const settings = useSelector((state) => state.settings);
+  const draggedTypeId = useSelector((state) => state.draggedTypeId);
+  const dispatch = useDispatch();
 
   const showTypes = [];
   const hiddenTypes = [];
@@ -31,10 +35,34 @@ const LeftColumn = () => {
     return accumulator;
   }, {});
 
+  const onDropShow = () => {
+    if (draggedTypeId) {
+      const draggedType = types.find((item) => draggedTypeId === item.id);
+      if (draggedType && draggedType.hidden) {
+        dispatch(updateType(draggedTypeId, { hidden: false }));
+        updateDoc("types", draggedTypeId, { hidden: false });
+      }
+    }
+  };
+
+  const onDropHidden = () => {
+    if (draggedTypeId) {
+      const draggedType = types.find((item) => draggedTypeId === item.id);
+      if (draggedType && !draggedType.hidden) {
+        dispatch(updateType(draggedTypeId, { hidden: true }));
+        updateDoc("types", draggedTypeId, { hidden: true });
+      }
+    }
+  };
+
+  const onDragOver = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <div className="left-column">
       <div className="type-item-container">
-        <div>
+        <div onDrop={onDropShow} onDragOver={onDragOver}>
           {showTypes &&
             showTypes.map((item) => (
               <TypeItem
@@ -51,20 +79,24 @@ const LeftColumn = () => {
             focusedTypeId={focusedTypeId}
             key={"0"}
             data={typesData["0"]}
+            draggable="true"
           />
         )}
         <AddTypeItem />
-        <HiddenTypeItem />
-        {settings.showHiddenTypeItems &&
-          hiddenTypes &&
-          hiddenTypes.map((item) => (
-            <TypeItem
-              type={item}
-              focusedTypeId={focusedTypeId}
-              key={item.id}
-              data={typesData[item.id]}
-            />
-          ))}
+        <div onDrop={onDropHidden} onDragOver={onDragOver}>
+          <HiddenTypeItem />
+          {settings.showHiddenTypeItems &&
+            hiddenTypes &&
+            hiddenTypes.map((item) => (
+              <TypeItem
+                type={item}
+                focusedTypeId={focusedTypeId}
+                key={item.id}
+                data={typesData[item.id]}
+                draggable="true"
+              />
+            ))}
+        </div>
       </div>
     </div>
   );

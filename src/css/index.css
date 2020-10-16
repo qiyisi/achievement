@@ -335,3 +335,7 @@ body {
 .flex {
   display: flex;
 }
+
+.cursor-grab {
+  cursor: grab;
+}
