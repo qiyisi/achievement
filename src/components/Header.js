@@ -1,9 +1,12 @@
 import React from "react";
+import styles from "../css/Header.module.css";
+
+console.log(styles);
 
 function Header() {
   return (
-    <header className="header">
-      <div className="header-title">ACHIEVEMENT</div>
+    <header className={styles.header}>
+      <div className={styles.header_title}>ACHIEVEMENT</div>
     </header>
   );
 }
