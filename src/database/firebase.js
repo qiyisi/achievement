@@ -2,13 +2,13 @@ import firebase from "firebase/app";
 import "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBOWfAIHwj96eNfvmnjXkD3A9EXAZDQbk0",
-  authDomain: "daily-qiyisi.firebaseapp.com",
-  databaseURL: "https://daily-qiyisi.firebaseio.com",
-  projectId: "daily-qiyisi",
-  storageBucket: "daily-qiyisi.appspot.com",
-  messagingSenderId: "618683222833",
-  appId: "1:618683222833:web:e98f724d485fb6406dbe10",
+  apiKey: "AIzaSyAyRwfNlwHAgCS6SWvwokkfqr3BZ-kBLVo",
+  authDomain: "achievement-qiyisi.firebaseapp.com",
+  databaseURL: "https://achievement-qiyisi.firebaseio.com",
+  projectId: "achievement-qiyisi",
+  storageBucket: "achievement-qiyisi.appspot.com",
+  messagingSenderId: "694193879902",
+  appId: "1:694193879902:web:003999a023686f553f2dcf",
 };
 
 const db = firebase.initializeApp(firebaseConfig).firestore();
