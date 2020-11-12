@@ -14,8 +14,8 @@ import { AuthContext } from "../context/auth";
 import { useForm } from "../util/hooks";
 
 const LOGIN_USER = gql`
-  mutation login($username: String!, $password: String!) {
-    login(username: $username, password: $password) {
+  mutation login($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
       id
       email
       username
@@ -59,13 +59,13 @@ const Login = (props) => {
           <Segment>
             <Form.Input
               fluid
-              icon="user"
+              icon="mail"
               iconPosition="left"
-              placeholder="Username"
-              name="username"
-              values={values.username}
+              placeholder="Email"
+              name="email"
+              values={values.email}
               onChange={onChange}
-              error={errors.username ? true : false}
+              error={errors.email ? true : false}
             />
             <Form.Input
               fluid
