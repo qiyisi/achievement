@@ -14,12 +14,22 @@ const typeDefs = gql`
     username: String!
     createdAt: String!
   }
+  type Achv {
+    id: ID!
+    user: ID!
+    title: String!
+    body: String
+    createdAt: String!
+  }
   type Query {
     getUsers: [User]
+    getAchvs: [Achv]
   }
   type Mutation {
-    login(username: String!, password: String!): User!
+    login(email: String!, password: String!): User!
     register(registerInput: RegisterInput): User!
+    createAchv(title: String!): Achv!
+    deleteAchv(achvId: ID!): String!
   }
 `;
 

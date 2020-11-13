@@ -2,11 +2,11 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { UserInputError } = require("apollo-server");
 
-const User = require("../models/User");
+const User = require("../../models/User");
 const {
   validateRegisterInput,
   validateLoginInput,
-} = require("../util/validators");
+} = require("../../util/validators");
 
 function generateToken(user) {
   return jwt.sign(
@@ -32,12 +32,12 @@ module.exports = {
     },
   },
   Mutation: {
-    async login(_, { username, password }) {
-      const { errors, valid } = validateLoginInput(username, password);
+    async login(_, { email, password }) {
+      const { errors, valid } = validateLoginInput(email, password);
       if (!valid) {
         throw new UserInputError("Errors", { errors });
       }
-      const user = await User.findOne({ username });
+      const user = await User.findOne({ email });
       if (!user) {
         errors.general = "User not found";
         throw new UserInputError("User not found", { errors });
@@ -67,11 +67,11 @@ module.exports = {
       if (!valid) {
         throw new UserInputError("Errors", { errors });
       }
-      const isTaken = await User.findOne({ username });
+      const isTaken = await User.findOne({ email });
       if (isTaken) {
-        throw new UserInputError("Username is taken", {
+        throw new UserInputError("Email is taken", {
           errors: {
-            username: "This username is taken",
+            email: "This email is taken",
           },
         });
       }
